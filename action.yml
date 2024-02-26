@@ -16,10 +16,13 @@ runs:
   using: "composite"
   steps:
     - name: Set Greeting
-      run: echo "Hello $INPUT_WHO_TO_GREET."
+      run: |
+         echo "Hello $INPUT_WHO_TO_GREET."
+         echo "Secret1: ${SECRET1}"
       shell: bash
       env:
         INPUT_WHO_TO_GREET: ${{ inputs.who-to-greet }}
+        SECRET1: ${{ fromJSON(inputs.secrets).SECRET1 }}
 
     - name: Random Number Generator
       id: random-number-generator
